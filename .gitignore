@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.egg
+*.egg-info/
+dist/
+build/
+*.log
+
+# Virtual environment
+venv/
+env/
+.venv/
+ENV/
+env.bak/
+
+# Django
+*.sqlite3
+*.db
+*.db-journal
+*.pot
+*.pyc
+*.pyo
+*.mo
+
+# VSCode
+.vscode/
+
+# Mac
+.DS_Store
+
+# dotenv
+.env

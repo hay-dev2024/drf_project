@@ -105,7 +105,7 @@ def studentDetailView(request, pk):
 #         return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-# CBV with mixins, generics
+# CBV with mixins
 # mixins.ListModelMixin : fetches objects
 # mixins.CreateModelMixin : creates objescts. in this case, an employee
 # generics.GenericAPIView : handles GET, POST requests
@@ -120,6 +120,21 @@ class Employees(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generic
         return self.create(request) # create() is a func of CreateModelMixin
     
     
+# mixins.RetrieveModelMixin : GET. fetches a single object
+# mixins.UpdateModelMixin : PUT; UPDATE
+# mixins.DestroyModelMixin : DELETE
+class EmployeeDetail(mixins.RetrieveModelMixin, mixins.UpdateModelMixin, mixins.DestroyModelMixin, generics.GenericAPIView):
+    queryset = Employee.objects.all()
+    serializer_class = EmployeeSerializer
 
-class EmployeeDetail(generics.GenericAPIView):
-    pass
+    # retrieves a single employee from the DB
+    def get(self, request, pk):
+        return self.retrieve(request, pk)
+    
+    def put(self, request, pk):
+        return self.update(request, pk)
+    
+    def delete(self, request, pk):
+        return self.destroy(request, pk)
+
+    
